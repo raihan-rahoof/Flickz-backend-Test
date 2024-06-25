@@ -76,13 +76,17 @@ class TheatreLoginSerializer(serializers.Serializer):
                 "Your account is currently pending review by our administration team. We will update you on Mail with the status of your account approval within one business day. Thank you for your patience."
             )
 
-        return {
+        validated_data =  {
             "email": user.email,
             "full_name": user.get_full_name,
             "id": user.id,
-            "access_token": user.tokens().get("access"),
-            "refresh_token": user.tokens().get("refresh"),
+            "access_token": str(user.tokens().get("access")),
+            "refresh_token": str(user.tokens().get("refresh")),
         }
+
+        print(f"Validated data: {validated_data}")
+
+        return validated_data
 
 
 # ------------- Show Serialiser ---------------------------
