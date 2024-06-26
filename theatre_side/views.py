@@ -17,7 +17,7 @@ from .serializers import (
     ShowSerializer,
 )
 from adminside.models import Movie
-
+import time
 
 class TheatreRegisterView(generics.GenericAPIView):
     serializer_class = TheatreRegistrationSerializer
@@ -36,6 +36,7 @@ class TheatreRegisterView(generics.GenericAPIView):
                 },
                 status=status.HTTP_201_CREATED,
             )
+        time.sleep(0.5)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -74,6 +75,7 @@ class TheatreLoginView(generics.GenericAPIView):
     def post(self,request,*args,**kwargs):
         serializer = self.get_serializer(data = request.data)
         serializer.is_valid(raise_exception=True)
+        time.sleep(0.5)
         return Response(serializer.validated_data, status=status.HTTP_200_OK)
 
 # ---------------- Shows -----------------
